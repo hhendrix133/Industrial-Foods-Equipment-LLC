@@ -32,9 +32,6 @@
 <style>
   html { 
     scroll-behavior: smooth;
-    /* Prevent horizontal overflow on Safari */
-    overflow-x: hidden;
-    width: 100%;
   }
 
   body {
@@ -44,9 +41,6 @@
     color: #e6e6e6;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
-    /* Prevent horizontal overflow on Safari */
-    overflow-x: hidden;
-    width: 100%;
     /* Safari-specific font smoothing */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -74,9 +68,6 @@
     padding: 26px 36px 36px;
     box-sizing: border-box;
     position: relative;
-    /* Prevent overflow on mobile */
-    overflow-x: hidden;
-    width: calc(100% - 40px);
   }
 
   /* ===== NAV ===== */
@@ -91,7 +82,6 @@
     background: #0b0b0b;
     padding: 16px 0;
     border-bottom: 2px solid #d4af37;
-    flex-wrap: wrap;
   }
 
   .top-nav a {
@@ -101,8 +91,6 @@
     font-size: 0.95em;
     transition: text-shadow 0.3s ease, color 0.3s ease;
     cursor: pointer;
-    /* Prevent text from breaking */
-    white-space: nowrap;
   }
 
   .top-nav a:hover,
@@ -125,7 +113,6 @@
     border: 3px solid #d4af37;
     padding: 8px;
     background: #000;
-    flex-shrink: 0;
   }
 
   .logo img {
@@ -142,9 +129,6 @@
     font-style: italic;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-    /* Prevent text overflow on Safari */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   .header-text p {
@@ -153,9 +137,6 @@
     color: #bbb;
     line-height: 1.45;
     text-indent: 2em;
-    /* Prevent text overflow on Safari */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   .gold-divider {
@@ -220,8 +201,6 @@
     border: 1px solid #d4af37;
     padding: 26px;
     color: #aaa;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   .news-text-box h2 {
@@ -305,9 +284,6 @@
     padding: 20px;
     color: #aaa;
     align-self: stretch;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0; /* Prevent flex item overflow */
   }
 
   .text-box h2 {
@@ -345,8 +321,6 @@
     padding: 26px;
     color: #aaa;
     margin-bottom: 40px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   .history-images {
@@ -500,8 +474,6 @@
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   #secret-vault-section.show {
@@ -515,8 +487,6 @@
     font-size: 0.95em;
     line-height: 1.6;
     white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
   }
 
   /* ===== FOOTER ===== */
@@ -526,9 +496,6 @@
     margin-top: 30px;
     color: #bfae6a;
     font-size: 0.9em;
-    /* Prevent overflow on Safari mobile */
-    overflow-x: hidden;
-    width: 100%;
   }
 
   .footer-row {
@@ -541,25 +508,13 @@
 
   .footer-quote {
     max-width: 70%;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    min-width: 0;
   }
 
   .footer-meta {
     text-align: right;
+    white-space: nowrap;
     font-size: 0.85em;
     color: #9f8f4f;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-width: 100%;
-  }
-
-  .footer-meta div {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    /* Allow text to wrap on Safari mobile */
-    white-space: normal;
   }
 
   /* ===== MOBILE & SAFARI SPECIFIC FIXES ===== */
@@ -567,7 +522,6 @@
     .site-frame {
       margin: 10px;
       padding: 20px 16px 20px;
-      width: calc(100% - 20px);
       border-width: 3px;
     }
 
@@ -578,6 +532,15 @@
     
     .header-text p { 
       text-indent: 0; 
+    }
+    
+    .header-text h1 {
+      font-size: 1.4em;
+      letter-spacing: 1px;
+    }
+
+    .header-text p {
+      font-size: 0.9em;
     }
     
     .news-item { 
@@ -608,7 +571,6 @@
     .footer-row { 
       flex-direction: column; 
       text-align: center; 
-      gap: 20px;
     }
     
     .footer-quote {
@@ -617,7 +579,7 @@
     
     .footer-meta { 
       text-align: center;
-      width: 100%;
+      white-space: normal;
     }
     
     .top-nav { 
@@ -628,16 +590,6 @@
     #digit-pass-area { 
       left: 20px; 
       bottom: 80px; 
-    }
-
-    /* Safari mobile specific fixes */
-    .header-text h1 {
-      font-size: 1.4em;
-      letter-spacing: 1px;
-    }
-
-    .header-text p {
-      font-size: 0.9em;
     }
 
     #products > h2,
@@ -657,7 +609,6 @@
     .site-frame {
       margin: 5px;
       padding: 15px 12px 15px;
-      width: calc(100% - 10px);
       border-width: 2px;
     }
 
