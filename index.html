@@ -4,10 +4,20 @@
 <meta charset="UTF-8">
 <title>Industrial Equipment & Foods</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Enhanced viewport settings for better Safari mobile control -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="description" content="Industrial Equipment & Foods — innovating industrial consumables since 1897.">
 
-<link rel="icon" type="image/png" href="images/Favicon.png">
+<!-- FAVICON - Multiple formats for better browser compatibility -->
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+<link rel="shortcut icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+
+<!-- Safari-specific meta tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <!-- Google tag (gtag.js) -->
@@ -20,7 +30,12 @@
   gtag('config', 'G-J6DLYEMS15');
 </script>
 <style>
-  html { scroll-behavior: smooth; }
+  html { 
+    scroll-behavior: smooth;
+    /* Prevent horizontal overflow on Safari */
+    overflow-x: hidden;
+    width: 100%;
+  }
 
   body {
     margin: 0;
@@ -29,6 +44,12 @@
     color: #e6e6e6;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
+    /* Prevent horizontal overflow on Safari */
+    overflow-x: hidden;
+    width: 100%;
+    /* Safari-specific font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   body::-webkit-scrollbar { 
     display: none; /* Chrome, Safari, Opera */
@@ -38,6 +59,8 @@
   * {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* Prevent all elements from causing horizontal overflow */
+    box-sizing: border-box;
   }
   *::-webkit-scrollbar {
     display: none;
@@ -51,6 +74,9 @@
     padding: 26px 36px 36px;
     box-sizing: border-box;
     position: relative;
+    /* Prevent overflow on mobile */
+    overflow-x: hidden;
+    width: calc(100% - 40px);
   }
 
   /* ===== NAV ===== */
@@ -65,6 +91,7 @@
     background: #0b0b0b;
     padding: 16px 0;
     border-bottom: 2px solid #d4af37;
+    flex-wrap: wrap;
   }
 
   .top-nav a {
@@ -74,6 +101,8 @@
     font-size: 0.95em;
     transition: text-shadow 0.3s ease, color 0.3s ease;
     cursor: pointer;
+    /* Prevent text from breaking */
+    white-space: nowrap;
   }
 
   .top-nav a:hover,
@@ -96,6 +125,7 @@
     border: 3px solid #d4af37;
     padding: 8px;
     background: #000;
+    flex-shrink: 0;
   }
 
   .logo img {
@@ -112,6 +142,9 @@
     font-style: italic;
     font-family: 'Playfair Display', serif;
     font-weight: 600;
+    /* Prevent text overflow on Safari */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .header-text p {
@@ -120,6 +153,9 @@
     color: #bbb;
     line-height: 1.45;
     text-indent: 2em;
+    /* Prevent text overflow on Safari */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .gold-divider {
@@ -184,6 +220,8 @@
     border: 1px solid #d4af37;
     padding: 26px;
     color: #aaa;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .news-text-box h2 {
@@ -267,6 +305,9 @@
     padding: 20px;
     color: #aaa;
     align-self: stretch;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0; /* Prevent flex item overflow */
   }
 
   .text-box h2 {
@@ -304,6 +345,8 @@
     padding: 26px;
     color: #aaa;
     margin-bottom: 40px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   .history-images {
@@ -457,6 +500,8 @@
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s ease, transform 0.8s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   #secret-vault-section.show {
@@ -470,6 +515,8 @@
     font-size: 0.95em;
     line-height: 1.6;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* ===== FOOTER ===== */
@@ -479,6 +526,9 @@
     margin-top: 30px;
     color: #bfae6a;
     font-size: 0.9em;
+    /* Prevent overflow on Safari mobile */
+    overflow-x: hidden;
+    width: 100%;
   }
 
   .footer-row {
@@ -491,28 +541,146 @@
 
   .footer-quote {
     max-width: 70%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    min-width: 0;
   }
 
   .footer-meta {
     text-align: right;
-    white-space: nowrap;
     font-size: 0.85em;
     color: #9f8f4f;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
+  .footer-meta div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    /* Allow text to wrap on Safari mobile */
+    white-space: normal;
+  }
+
+  /* ===== MOBILE & SAFARI SPECIFIC FIXES ===== */
   @media (max-width: 900px) {
-    .header { flex-direction: column; text-align: center; }
-    .header-text p { text-indent: 0; }
-    .news-item { flex-direction: column; }
-    .news-image-box { max-width: 100%; }
-    .product, .product.reverse { flex-direction: column; }
-    .image-box { max-width: 100%; }
-    .history-images { flex-direction: column; align-items: center; }
-    .history-image-box.large, .history-image-box.small { max-width: 100%; }
-    .footer-row { flex-direction: column; text-align: center; }
-    .footer-meta { text-align: center; }
-    .top-nav { gap: 20px; font-size: 0.9em; }
-    #digit-pass-area { left: 20px; bottom: 80px; }
+    .site-frame {
+      margin: 10px;
+      padding: 20px 16px 20px;
+      width: calc(100% - 20px);
+      border-width: 3px;
+    }
+
+    .header { 
+      flex-direction: column; 
+      text-align: center; 
+    }
+    
+    .header-text p { 
+      text-indent: 0; 
+    }
+    
+    .news-item { 
+      flex-direction: column; 
+    }
+    
+    .news-image-box { 
+      max-width: 100%; 
+    }
+    
+    .product, .product.reverse { 
+      flex-direction: column; 
+    }
+    
+    .image-box { 
+      max-width: 100%; 
+    }
+    
+    .history-images { 
+      flex-direction: column; 
+      align-items: center; 
+    }
+    
+    .history-image-box.large, .history-image-box.small { 
+      max-width: 100%; 
+    }
+    
+    .footer-row { 
+      flex-direction: column; 
+      text-align: center; 
+      gap: 20px;
+    }
+    
+    .footer-quote {
+      max-width: 100%;
+    }
+    
+    .footer-meta { 
+      text-align: center;
+      width: 100%;
+    }
+    
+    .top-nav { 
+      gap: 20px; 
+      font-size: 0.9em; 
+    }
+    
+    #digit-pass-area { 
+      left: 20px; 
+      bottom: 80px; 
+    }
+
+    /* Safari mobile specific fixes */
+    .header-text h1 {
+      font-size: 1.4em;
+      letter-spacing: 1px;
+    }
+
+    .header-text p {
+      font-size: 0.9em;
+    }
+
+    #products > h2,
+    .history-section h2 {
+      font-size: 1.8em;
+    }
+
+    /* Force proper text wrapping on Safari iOS */
+    * {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+  }
+
+  /* Extra small mobile devices (Safari iPhone) */
+  @media (max-width: 480px) {
+    .site-frame {
+      margin: 5px;
+      padding: 15px 12px 15px;
+      width: calc(100% - 10px);
+      border-width: 2px;
+    }
+
+    .top-nav {
+      gap: 15px;
+      font-size: 0.85em;
+      padding: 12px 0;
+    }
+
+    .footer-meta {
+      font-size: 0.75em;
+    }
+
+    .footer-meta div {
+      margin-bottom: 8px;
+    }
+
+    /* Ensure copyright text wraps properly on iPhone Safari */
+    .footer-meta div:nth-child(3) {
+      word-break: break-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
   }
 </style>
 </head>
