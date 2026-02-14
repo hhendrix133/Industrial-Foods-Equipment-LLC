@@ -19,7 +19,6 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6DLYEMS15"></script>
 <script>
@@ -118,7 +117,6 @@
   .logo img {
     width: 100%;
     display: block;
-    cursor: pointer;
   }
 
   .header-text h1 {
@@ -161,7 +159,7 @@
     border: 3px solid #d4af37;
     padding: 12px;
     background: #000;
-    max-width: 320px;
+    max-width: 400px;
     flex: 1;
     transition: box-shadow 0.4s ease;
   }
@@ -230,8 +228,8 @@
 
   .product {
     display: flex;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: 24px;
+    margin-bottom: 24px;
     align-items: flex-start;
   }
 
@@ -241,7 +239,7 @@
     border: 3px solid #d4af37;
     padding: 12px;
     background: #000;
-    max-width: 460px;
+    max-width: 420px;
     transition: box-shadow 0.4s ease;
     flex-shrink: 0;
   }
@@ -255,7 +253,6 @@
     max-height: 500px;
     object-fit: contain;
     display: block;
-    cursor: pointer;
     opacity: 0;
     transform: translateY(28px);
     transition:
@@ -278,26 +275,35 @@
     filter: brightness(1.2);
   }
 
+  /* Only IHG image is clickable */
+  .image-box img.clickable {
+    cursor: pointer;
+  }
+
   .text-box {
     flex: 1;
     border: 1px solid #d4af37;
-    padding: 20px;
+    padding: 18px;
     color: #aaa;
     align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .text-box h2 {
     color: #d4af37;
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 600;
+    font-size: 1.5em;
   }
 
   .text-box p {
     margin: 0;
-    line-height: 1.5;
+    line-height: 1.45;
   }
 
   /* ===== HISTORY SECTION ===== */
@@ -344,16 +350,8 @@
     flex: 1 1 auto;
   }
 
-  .history-image-box.large img {
-    cursor: pointer;
-  }
-
   .history-image-box.small {
     max-width: 175px;
-  }
-
-  .history-image-box.small img {
-    cursor: pointer;
   }
 
   .history-image-box:hover {
@@ -365,16 +363,12 @@
     max-height: 500px;
     object-fit: contain;
     display: block;
-    opacity: 1; /* Always visible - no fade */
-    transform: translateY(0); /* No slide animation */
+    cursor: pointer;
+    opacity: 1;
+    transform: translateY(0);
     transition:
       box-shadow 0.4s ease,
       filter 0.4s ease;
-  }
-
-  .history-image-box img.visible {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .history-image-box img.visible:hover {
@@ -383,110 +377,6 @@
       0 0 20px #d4af37,
       0 0 27px #d4af37;
     filter: brightness(1.2);
-  }
-
-  /* ===== STEALTH PUZZLE UI (Below Footer Quote) ===== */
-  #digit-pass-area {
-    display: none;
-    margin-top: 20px;
-    width: 150px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-
-  #digit-pass-area.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  #digit-pass-area.hide-away {
-    opacity: 0;
-    transform: translateY(30px) scale(0.9);
-    pointer-events: none;
-  }
-
-  .stealth-header {
-    font-size: 11px;
-    color: #d4af37;
-    font-family: monospace;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-    font-weight: bold;
-  }
-
-  .digit-input-wrapper {
-    display: flex;
-    gap: 6px;
-  }
-
-  .pass-digit {
-    width: 22px;
-    height: 28px;
-    background: #000;
-    border: 1px solid #222;
-    color: #d4af37;
-    text-align: center;
-    font-family: monospace;
-    font-size: 14px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .pass-digit:focus {
-    outline: none;
-    border-color: #d4af37;
-    box-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
-  }
-
-  .pass-digit.error {
-    border-color: #ff0000;
-    animation: shake 0.4s ease;
-  }
-
-  @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
-  }
-
-  #lock-msg {
-    color: #ff0000;
-    font-weight: bold;
-    font-size: 11px;
-    margin-top: 4px;
-    display: none;
-    text-transform: uppercase;
-    animation: pulse 1s ease infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  /* ===== SECRET VAULT ===== */
-  #secret-vault-section {
-    display: none;
-    margin-top: 40px;
-    padding: 30px;
-    border: 2px solid #d4af37;
-    background: #050505;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-
-  #secret-vault-section.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .vault-display {
-    color: #00ff41;
-    font-family: 'Courier New', monospace;
-    font-size: 0.95em;
-    line-height: 1.6;
-    white-space: pre-wrap;
   }
 
   /* ===== FOOTER ===== */
@@ -502,12 +392,14 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 15px;
+    gap: 30px;
     flex-wrap: wrap;
   }
 
   .footer-quote {
-    max-width: 70%;
+    flex: 1;
+    max-width: 60%;
+    min-width: 300px;
   }
 
   .footer-meta {
@@ -515,6 +407,62 @@
     white-space: nowrap;
     font-size: 0.85em;
     color: #9f8f4f;
+    flex-shrink: 0;
+  }
+
+  /* Music credits that sync with current song */
+  .music-credits {
+    margin-top: 8px;
+    font-size: 1em;
+    color: #bfae6a;
+    height: auto;
+    position: relative;
+  }
+
+  .music-credit {
+    display: none;
+  }
+
+  .music-credit.active {
+    display: block;
+  }
+
+  .music-credit a {
+    color: #9f8f4f;
+    text-decoration: none;
+  }
+
+  .music-credit a:hover {
+    color: #d4af37;
+    text-decoration: underline;
+  }
+
+  /* Popup message - top-left corner of site frame */
+  #music-popup {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(11, 11, 11, 0.85);
+    padding: 6px 16px;
+    z-index: 10000;
+    text-align: center;
+    color: #9f8f4f;
+    font-size: 0.75em;
+    opacity: 1;
+    transition: opacity 1.5s ease;
+    white-space: nowrap;
+    border: none;
+    box-shadow: none;
+  }
+
+  #music-popup.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #music-popup p {
+    margin: 0;
+    line-height: 1.2;
   }
 
   /* ===== MOBILE & SAFARI SPECIFIC FIXES ===== */
@@ -570,26 +518,36 @@
     
     .footer-row { 
       flex-direction: column; 
-      text-align: center; 
+      text-align: center;
+      gap: 20px;
     }
     
     .footer-quote {
       max-width: 100%;
+      min-width: auto;
     }
     
     .footer-meta { 
       text-align: center;
       white-space: normal;
     }
+
+    .music-credits {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.9em;
+    }
+
+    #music-popup {
+      padding: 5px 14px;
+      font-size: 0.7em;
+      top: 8px;
+      left: 8px;
+    }
     
     .top-nav { 
       gap: 20px; 
       font-size: 0.9em; 
-    }
-    
-    #digit-pass-area { 
-      left: 20px; 
-      bottom: 80px; 
     }
 
     #products > h2,
@@ -626,6 +584,17 @@
       margin-bottom: 8px;
     }
 
+    .music-credits {
+      font-size: 0.8em;
+    }
+
+    #music-popup {
+      padding: 4px 12px;
+      font-size: 0.65em;
+      top: 6px;
+      left: 6px;
+    }
+
     /* Ensure copyright text wraps properly on iPhone Safari */
     .footer-meta div:nth-child(3) {
       word-break: break-word;
@@ -640,16 +609,21 @@
 
 <div class="site-frame">
 
+  <!-- Music control popup message - top-left corner -->
+  <div id="music-popup">
+    <p>Double Click Anywhere Audio Control</p>
+  </div>
+
   <nav class="top-nav">
     <a href="index.html">Home</a>
-    <a href="#news" class="combo-trigger" data-section="news">News</a>
-    <a href="#products" class="combo-trigger" data-section="products">Products</a>
-    <a href="#history" class="combo-trigger" data-section="history">History</a>
+    <a href="#news">News</a>
+    <a href="#products">Products</a>
+    <a href="#history">History</a>
   </nav>
 
   <div class="header">
     <div class="logo">
-      <img src="images/industrial-equipment-foods-logo.png" alt="Industrial Equipment & Foods Logo" class="secret-link" data-url="https://www.youtube.com/@ModMaster_cat">
+      <img src="images/industrial-equipment-foods-logo.png" alt="Industrial Equipment & Foods Logo">
     </div>
     <div class="header-text">
       <h1>Our Initiative At Industrial Foods & Equipment LLC</h1>
@@ -674,10 +648,10 @@
         <h2>Current Corporate Headlines</h2>
         <p><strong>January 24, 2026</strong></p>
         <p><strong>BREAKING: I.H.A. Plant Explodes in Texas</strong></p>
-        <p>TEXAS (ABC News) — A chemical plant producing Industrial Human Adhesive (I.H.A.) exploded today after an activist breached security and ignited a fire during a restock. The blaze emitted a "bright red glow" and pungent odors, forcing a 5-hour local shelter-in-place order. Officials are investigating the environmental impact of the I.H.A. runoff.</p>
+        <p>TEXAS (Industry Insights<sup style="font-size: 0.6em;">TM</sup>) — A chemical plant producing Industrial Human Adhesive (I.H.A.) exploded today after an activist breached security and ignited a fire during a restock. The blaze emitted a "bright red glow" and pungent odors, forcing a 5-hour local shelter-in-place order. Officials are investigating the environmental impact of the I.H.A. runoff.</p>
       </div>
       <div class="news-image-box">
-        <img class="ad-image" id="news-img" src="images/NewsTexasExplosion.jpg" alt="News Update">
+        <img class="ad-image" id="news-img" src="images/NewsTexasExplosion.png" alt="News Update">
       </div>
     </div>
   </div>
@@ -689,31 +663,31 @@
 
     <div class="product">
       <div class="image-box">
-        <img class="ad-image secret-link" src="images/ihg-original.png" alt="IHG Advertisement" data-url="https://forms.gle/hM5YHyV8oRqAueGi9">
+        <img class="ad-image clickable" id="ihg-img" src="images/ihg-original.png" alt="IHG Advertisement">
       </div>
       <div class="text-box">
         <h2>Industrial Humanized Grease (I.H.G.)</h2>
-        <p>First released in 1975, this <strong>Q</strong>uintessential lubricant has achieved legendary status over five decades. While its versatile chemical properties allow for applications ranging from industrial shaving cream to artificial butter, its impact on the market remains unforgettable. Some clients claim it rivals a five-course meal; others simply cannot operate without it.</p>
+        <p>First released in 1975, this quintessential lubricant has achieved legendary status over five decades. While its versatile chemical properties allow for applications ranging from industrial shaving cream to artificial butter, its impact on the market remains unforgettable. Some clients claim it rivals a five-course meal; others simply cannot operate without it.</p>
       </div>
     </div>
 
     <div class="product reverse">
       <div class="image-box">
-        <img class="ad-image secret-link" src="images/ivf.png" alt="IVF Advertisement" data-url="https://music.youtube.com/watch?v=A1jdPMTPaEg&list=PLAoN-wsK7mvPUS6n5WlMkbJoSnVC3-Pe1">
+        <img class="ad-image" src="images/ivf.png" alt="IVF Advertisement">
       </div>
       <div class="text-box">
         <h2>Industrial Versatile Flavoring (I.V.F.)</h2>
-        <p>Our <strong>9</strong>th generation flavoring system, launched in 2020, is a cornerstone of modern food engineering. Retailing <strong>@</strong> $32 per quarter gallon, I.V.F. possesses the unique ability to transform basic gruel into a gourmet dessert experience. It is <strong>@</strong>bsolutely essential for those seeking maximum flavor potential—just mix, shock, and serve. To date, this remains a top performer with 3.4 billion units sold.</p>
+        <p>Our 9th generation flavoring system, launched in 2020, is a cornerstone of modern food engineering. Retailing at $32 per quarter gallon, I.V.F. possesses the unique ability to transform basic gruel into a gourmet dessert experience. It is absolutely essential for those seeking maximum flavor potential—just mix, shock, and serve. To date, this remains a top performer with 3.4 billion units sold.</p>
       </div>
     </div>
 
     <div class="product">
       <div class="image-box">
-        <img class="ad-image secret-link" src="images/iha.png" alt="IHA Advertisement" data-url="https://music.youtube.com/watch?v=XVxO6fKtrw4&list=PLAoN-wsK7mvPUS6n5WlMkbJoSnVC3-Pe1">
+        <img class="ad-image" src="images/iha.png" alt="IHA Advertisement">
       </div>
       <div class="text-box">
         <h2>Industrial Human Adhesive (I.H.A.)</h2>
-        <p>The result of a <strong>p</strong>rolonged 125-year development cycle, I.H.A. is officially recognized as the world's strongest industrial-grade spray. Engineered specifically to avoid bonding with human skin, it offers unparalleled safety and efficiency in the workspace. Despite recent facility disruptions, our commitment to this non-reactive adhesive technology remains the gold standard of the industry.</p>
+        <p>The result of a prolonged 125-year development cycle, I.H.A. is officially recognized as the world's strongest industrial-grade spray. Engineered specifically to avoid bonding with human skin, it offers unparalleled safety and efficiency in the workspace. Despite recent facility disruptions, our commitment to this non-reactive adhesive technology remains the gold standard of the industry.</p>
       </div>
     </div>
 
@@ -726,13 +700,13 @@
     
     <div class="history-text-box">
       <p><strong>The Founding Era (1897–1930)</strong></p>
-      <p>Established in 1897 in Bengal by J.P. Richardson Sr., the company pivoted from molasses to "absorbed and awful" industrial machinery following a global sugar crash. Though early appliances were discontinued, the factory remained an experimental powerhouse. <strong>P</strong>roper <strong>P</strong>roduction <strong>P</strong>rotocols were established here to ensure our machinery never failed under pressure.</p>
+      <p>Established in 1897 in Bengal by J.P. Richardson Sr., the company pivoted from molasses to "absorbed and awful" industrial machinery following a global sugar crash. Though early appliances were discontinued, the factory remained an experimental powerhouse. Proper Production Protocols were established here to ensure our machinery never failed under pressure.</p>
       
       <p><strong>The American Expansion (1975–2002)</strong></p>
-      <p>Under Jonathan Richardson, we moved to the U.S., launching Industrial Humanized Grease (I.H.G.) in 1975 with 182,000 units sold in 90 days. <strong>N</strong>otable expansions funded a nationwide network of manufacturing plants and secret research laboratories.</p>
+      <p>Under Jonathan Richardson, we moved to the U.S., launching Industrial Humanized Grease (I.H.G.) in 1975 with 182,000 units sold in 90 days. Notable expansions funded a nationwide network of manufacturing plants and secret research laboratories.</p>
       
       <p><strong>The Albuquerque Tragedy & Modern Growth</strong></p>
-      <p>In the late 1980s, Jonathan Richardson (age 62) suffered a fatal heart attack on a flight from New Mexico after being denied a merger by GE's Jack Welch. At the time of his passing, the firm was valued at $3.63 billion (on Wednesdays). <strong>H</strong>ighly <strong>H</strong>idden assets remain within the Richardson estate.</p>
+      <p>In the late 1980s, Jonathan Richardson (age 62) suffered a fatal heart attack on a flight from New Mexico after being denied a merger by GE's Jack Welch. At the time of his passing, the firm was valued at $3.63 billion (on Wednesdays). Highly Hidden assets remain within the Richardson estate.</p>
       
       <p><strong>The Present Era</strong></p>
       <p>Today, we employ over 17,000 specialists. Following the 2020 success of Industrial Versatile Flavoring (I.V.F.), we released Industrial Human Adhesive (I.H.A.) in 2023—the first professional glue engineered to never stick to human skin.</p>
@@ -748,57 +722,26 @@
     </div>
   </div>
 
-  <!-- SECRET VAULT -->
-  <div id="secret-vault-section">
-    <h3 style="color:#d4af37; font-family:'Lobster', cursive; font-style:italic; margin-top:0; font-size:1.8em;">Vault</h3>
-    <div class="vault-display" style="color:#aaa;">
-<strong style="color:#d4af37;">INTERNAL ACCESS: CLASSIFIED LEVEL 4</strong>
-
-<strong>TO:</strong> Authorized Personnel & Strategic Stakeholders
-<strong>FROM:</strong> Executive Office of Industrial Foods & Equipment LLC
-<strong>SUBJECT:</strong> Project Revelation: The Next Industrial Frontier
-
-Congratulations on successfully bypassing our tiered access protocols. Whether through analytical prowess or careful observation, your presence here marks you as a true enthusiast of the Industrial legacy.
-
-We are proud to announce the next phase of our corporate evolution: <strong>The I.F.E. Autonomous Systems Initiative.</strong>
-
-Breaking away from our traditional chemical and flavoring roots, our upcoming <strong>Industrial Robotics Line</strong> will modernize operational efficiency across two critical sectors:
-
-• <strong>Surveillance & Security:</strong> High-fidelity monitoring systems designed to protect I.F.E. interests globally.
-• <strong>Maintenance & Housekeeping:</strong> Heavy-duty autonomous units engineered for the most demanding industrial environments.
-
-<strong>Official Global Launch: June 19, 2027.</strong>
-
-We thank you for your continued loyalty as we expand our "wild dreams" into the future of robotics. Our digital infrastructure contains further hidden secrets; we advise you to remain vigilant.
-
-<strong style="color:#d4af37;">Stay Sharp.</strong>
-
-Executive Management, Industrial Foods & Equipment LLC
-<em>"The Gold Standard Since 1897"</em>
-    </div>
-  </div>
-
   <footer>
     <div class="footer-row">
       <div class="footer-quote">
         "Even over a century later, we never fail to innovate." — Industrial Equipment & Foods LLC
-        
-        <!-- STEALTH PUZZLE UI - Right below quote -->
-        <div id="digit-pass-area">
-          <div class="stealth-header">Enter Pin Here</div>
-          <div class="digit-input-wrapper">
-            <input type="text" maxlength="1" class="pass-digit" id="p1" autocomplete="off">
-            <input type="text" maxlength="1" class="pass-digit" id="p2" autocomplete="off">
-            <input type="text" maxlength="1" class="pass-digit" id="p3" autocomplete="off">
-            <input type="text" maxlength="1" class="pass-digit" id="p4" autocomplete="off">
-          </div>
-          <div id="lock-msg">Locked Out</div>
+        <div style="font-size: 0.7em; margin-top: 8px; color: #d4af37; line-height: 1.4;">
+          Disclaimer: This site is fictional and satirical. All characters, companies, and media are original or credited; any similarity to real people or organizations is coincidental.
         </div>
       </div>
       <div class="footer-meta">
         <div id="last-updated">Last Update: --</div>
         <div>Customer Delight Line : +1 (800) 444-1987</div>
-        <div style="color: #d4af37;">© 1897 - 2026 Industrial Foods & Equipment LLC | All Rights Reserved |</div>
+        <div style="color: #d4af37;">© 1897 - 2026 Industrial Foods & Equipment LLC | All Rights Reserved</div>
+        <div class="music-credits">
+          <div class="music-credit active" id="credit-1">
+            Music: "Falling" — Sappheiros · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>
+          </div>
+          <div class="music-credit" id="credit-2">
+            Music: "IT'S OKAY" — firefl!es · <a href="https://youtu.be/K5hZqj8pY2Q" target="_blank" rel="noopener">CC BY 3.0</a>
+          </div>
+        </div>
         <div style="font-size: 0.75em; margin-top: 4px;">Disclaimer: For informational purposes only. Industrial Foods & Equipment LLC assumes no liability for use of products or technical specifications.</div>
       </div>
     </div>
@@ -810,55 +753,47 @@ Executive Management, Industrial Foods & Equipment LLC
   // --- Background Music System ---
   let musicStarted = false;
   
-  // Main theme playlist
-  const mainThemes = [
-    new Audio('sounds/C418 -Alpha.mp3'),
-    new Audio('sounds/MainTheme3.mp3'),
-    new Audio('sounds/MainTheme2.mp3')
+  // Royalty-free music playlist with credit info
+  const playlistData = [
+    {
+      audio: new Audio('sounds/[Non Copyrighted Music] Sappheiros - Falling.mp3'),
+      creditId: 'credit-1'
+    },
+    {
+      audio: new Audio('sounds/(Royalty Free Music) -IT\'S OKAYByFirefl!es.mp3'),
+      creditId: 'credit-2'
+    }
   ];
   
-  const specialTheme = new Audio('sounds/MainThemeSpecial.mp3');
-  specialTheme.volume = 0.3;
-  
-  let currentThemeIndex = 0;
-  let bgMusic = mainThemes[currentThemeIndex];
+  let currentTrackIndex = 0;
+  let bgMusic = playlistData[currentTrackIndex].audio;
   bgMusic.volume = 0.3;
   
-  // Set up all themes
-  mainThemes.forEach(theme => {
-    theme.volume = 0.3;
-    theme.addEventListener('ended', () => {
-      if (specialThemeUnlocked && theme === bgMusic) {
-        // Play special theme
-        bgMusic = specialTheme;
-        specialTheme.play();
-        specialThemeUnlocked = false; // Reset unlock
-        
-        specialTheme.addEventListener('ended', () => {
-          // After special theme, continue with normal rotation
-          currentThemeIndex = (currentThemeIndex + 1) % mainThemes.length;
-          bgMusic = mainThemes[currentThemeIndex];
-          if (!bgMusic.paused || musicStarted) {
-            bgMusic.play();
-          }
-        }, { once: true });
-      } else {
-        // Normal theme rotation
-        currentThemeIndex = (currentThemeIndex + 1) % mainThemes.length;
-        bgMusic = mainThemes[currentThemeIndex];
-        bgMusic.play();
-      }
+  // Update credit display based on current song
+  function updateCredit() {
+    // Hide all credits
+    document.querySelectorAll('.music-credit').forEach(credit => {
+      credit.classList.remove('active');
+    });
+    // Show current song credit
+    const currentCreditId = playlistData[currentTrackIndex].creditId;
+    document.getElementById(currentCreditId).classList.add('active');
+  }
+  
+  // Set up playlist rotation
+  playlistData.forEach((track, index) => {
+    track.audio.volume = 0.3;
+    track.audio.addEventListener('ended', () => {
+      // Move to next track
+      currentTrackIndex = (currentTrackIndex + 1) % playlistData.length;
+      bgMusic = playlistData[currentTrackIndex].audio;
+      updateCredit(); // Update credit when song changes
+      bgMusic.play();
     });
   });
 
-  const celebrationSound1 = new Audio('sounds/no-copyright2.mp3'); // For confetti (first puzzle)
-  celebrationSound1.volume = 0.5;
-  
-  const celebrationSound2 = new Audio('sounds/No-Copyright.mp3'); // For vault unlock
-  celebrationSound2.volume = 0.5;
-
-  let bgMusicWasPlaying = false;
-  let currentCelebration = null;
+  // Initialize with first song's credit
+  updateCredit();
 
   function startMusic() {
     if (!musicStarted) {
@@ -866,17 +801,41 @@ Executive Management, Industrial Foods & Equipment LLC
         console.log('Audio playback prevented:', err);
       });
       musicStarted = true;
+      hidePopup();
     }
   }
 
-  // Start music on first click anywhere
-  document.addEventListener('click', startMusic, { once: true });
+  // First interaction: single click OR triple-click starts music
+  let initialClickCount = 0;
+  let initialClickTimer = null;
 
-  // Triple-click handler for pause/play and skip celebration
-  let clickCount = 0;
-  let clickTimer = null;
+  function handleInitialClick() {
+    initialClickCount++;
+    
+    if (initialClickTimer) {
+      clearTimeout(initialClickTimer);
+    }
+    
+    if (initialClickCount === 1) {
+      // Single click - start music after short delay (if no more clicks)
+      initialClickTimer = setTimeout(() => {
+        if (initialClickCount === 1) {
+          startMusic();
+          switchToNormalMode();
+        }
+        initialClickCount = 0;
+      }, 300);
+    } else if (initialClickCount === 3) {
+      // Triple click - start music immediately
+      clearTimeout(initialClickTimer);
+      startMusic();
+      switchToNormalMode();
+      initialClickCount = 0;
+    }
+  }
 
-  document.addEventListener('click', () => {
+  // After music starts: only triple-click toggles
+  function handleNormalClick() {
     clickCount++;
     
     if (clickTimer) {
@@ -885,145 +844,27 @@ Executive Management, Industrial Foods & Equipment LLC
     
     clickTimer = setTimeout(() => {
       if (clickCount === 3) {
-        // Triple click detected
-        
-        // Check if celebration is playing - skip it
-        if (currentCelebration && !currentCelebration.paused) {
-          currentCelebration.pause();
-          currentCelebration.currentTime = 0;
-          currentCelebration = null;
-          
-          // Resume bg music if it was playing
-          if (bgMusicWasPlaying) {
-            bgMusic.play();
-          }
-        } else if (musicStarted) {
-          // Toggle main music
-          if (bgMusic.paused) {
-            bgMusic.play();
-          } else {
-            bgMusic.pause();
-          }
+        // Triple click detected - toggle music
+        if (bgMusic.paused) {
+          bgMusic.play();
+        } else {
+          bgMusic.pause();
         }
+        // Credit stays showing the last played song (current track)
       }
       clickCount = 0;
     }, 400); // 400ms window for triple click
-  });
-
-  // Play celebration sound and pause bg music temporarily
-  function playCelebrationSound(sound) {
-    bgMusicWasPlaying = !bgMusic.paused;
-    
-    if (bgMusicWasPlaying) {
-      bgMusic.pause();
-    }
-    
-    currentCelebration = sound;
-    sound.currentTime = 0; // Reset to start
-    sound.play();
-    
-    sound.addEventListener('ended', () => {
-      currentCelebration = null;
-      if (bgMusicWasPlaying) {
-        bgMusic.play();
-      }
-    }, { once: true });
   }
 
-  // --- Special Theme Unlock (Scroll top/bottom 4 times in 10 seconds) ---
-  let specialThemeUnlocked = false;
-  let scrollPositions = [];
-  const SCROLL_THRESHOLD = 100; // px from top/bottom
-  const UNLOCK_TIME_WINDOW = 10000; // 10 seconds
-  const REQUIRED_SCROLLS = 4;
-
-  function isAtTop() {
-    return window.scrollY < SCROLL_THRESHOLD;
+  function switchToNormalMode() {
+    document.removeEventListener('click', handleInitialClick);
+    document.addEventListener('click', handleNormalClick);
   }
 
-  function isAtBottom() {
-    return (window.innerHeight + window.scrollY) >= (document.body.scrollHeight - SCROLL_THRESHOLD);
-  }
-
-  let lastScrollPosition = null;
-
-  window.addEventListener('scroll', () => {
-    const now = Date.now();
-    const atTop = isAtTop();
-    const atBottom = isAtBottom();
-    
-    if ((atTop || atBottom) && lastScrollPosition !== (atTop ? 'top' : 'bottom')) {
-      lastScrollPosition = atTop ? 'top' : 'bottom';
-      
-      // Add scroll event
-      scrollPositions.push(now);
-      
-      // Remove old events outside time window
-      scrollPositions = scrollPositions.filter(time => (now - time) < UNLOCK_TIME_WINDOW);
-      
-      // Check if unlocked
-      if (scrollPositions.length >= REQUIRED_SCROLLS && !specialThemeUnlocked) {
-        specialThemeUnlocked = true;
-        console.log('Special theme unlocked!');
-        // Visual feedback (optional)
-        document.body.style.borderColor = '#d4af37';
-        setTimeout(() => {
-          document.body.style.borderColor = '';
-        }, 500);
-      }
-    } else if (!atTop && !atBottom) {
-      lastScrollPosition = null;
-    }
-  });
-
-  // --- Make all "industrial" words clickable GHOST links (invisible like photo links) ---
-  function linkifyIndustrial() {
-    const walker = document.createTreeWalker(
-      document.body,
-      NodeFilter.SHOW_TEXT,
-      null,
-      false
-    );
-
-    const nodesToReplace = [];
-    let node;
-
-    while (node = walker.nextNode()) {
-      // Skip script tags and already linked content
-      if (node.parentElement.tagName !== 'SCRIPT' && 
-          node.parentElement.tagName !== 'STYLE' &&
-          node.parentElement.tagName !== 'A') {
-        const text = node.textContent;
-        if (/industrial/i.test(text)) {
-          nodesToReplace.push(node);
-        }
-      }
-    }
-
-    nodesToReplace.forEach(node => {
-      const text = node.textContent;
-      const regex = /(industrial)/gi;
-      
-      if (regex.test(text)) {
-        const span = document.createElement('span');
-        span.innerHTML = text.replace(regex, (match) => {
-          const ghostLink = document.createElement('span');
-          ghostLink.textContent = match;
-          ghostLink.style.cursor = 'pointer';
-          ghostLink.style.color = 'inherit';
-          ghostLink.style.textDecoration = 'none';
-          ghostLink.addEventListener('click', () => {
-            window.open('https://www.google.com/search?q=Industrial&ie=UTF-8', '_blank', 'noopener');
-          });
-          return ghostLink.outerHTML;
-        });
-        node.parentNode.replaceChild(span, node);
-      }
-    });
-  }
-
-  // Run after page loads
-  window.addEventListener('load', linkifyIndustrial);
+  // Start with initial click handler
+  let clickCount = 0;
+  let clickTimer = null;
+  document.addEventListener('click', handleInitialClick);
 
   // --- Image Visibility Observer ---
   const images = document.querySelectorAll('.ad-image');
@@ -1035,25 +876,29 @@ Executive Management, Industrial Foods & Equipment LLC
 
   images.forEach(img => observer.observe(img));
 
+  // --- Popup Message Logic ---
+  function hidePopup() {
+    const popup = document.getElementById('music-popup');
+    popup.classList.add('hidden');
+  }
+
+  // Auto-hide popup after 10 seconds
+  setTimeout(hidePopup, 10000);
+
   // --- Date Logic ---
   const now = new Date();
   document.getElementById('last-updated').textContent =
     `Last Update: ${now.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' })}`;
 
-  // --- Secret link functionality ---
-  document.querySelectorAll('.secret-link').forEach(element => {
-    element.addEventListener('click', function(e) {
-      const url = this.getAttribute('data-url');
-      if (url) {
-        window.open(url, '_blank', 'noopener');
-      }
-    });
+  // --- IHG image click handler (only clickable image) ---
+  document.getElementById('ihg-img').addEventListener('click', function() {
+    window.open('https://forms.gle/hM5YHyV8oRqAueGi9', '_blank', 'noopener');
   });
 
   // --- News image cycling logic ---
   const newsImg = document.getElementById('news-img');
   const newsImages = [
-    'images/NewsTexasExplosion.jpg',
+    'images/NewsTexasExplosion.png',
     'images/News2.jpg'
   ];
   let newsCurrentIndex = 0;
@@ -1098,6 +943,7 @@ Executive Management, Industrial Foods & Equipment LLC
     }
   }, 10000);
 
+  // Both images can be clicked to swap
   smallImg.addEventListener('click', () => {
     hasManuallyClicked = true;
     clearInterval(autoSwapInterval);
@@ -1105,190 +951,9 @@ Executive Management, Industrial Foods & Equipment LLC
   });
 
   largeImg.addEventListener('click', () => {
-    window.open('https://www.youtube.com/watch?v=RC3FupR9Bj8&list=RDbBz8prEcBUA&index=5', '_blank', 'noopener');
-  });
-
-  // --- SECRET SEQUENCE LOGIC ---
-  // Sequence: Products, Products, Products, News, History, History
-  const comboSecret = ['products', 'products', 'products', 'news', 'history', 'history'];
-  let userCombo = [];
-  let isAutoScrolling = false;
-
-  document.querySelectorAll('.combo-trigger').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const section = link.getAttribute('data-section');
-      userCombo.push(section);
-
-      // Check sequence
-      const isCorrectSoFar = userCombo.every((val, i) => val === comboSecret[i]);
-      if (!isCorrectSoFar) {
-        userCombo = [section]; 
-      } else if (userCombo.length === comboSecret.length) {
-        e.preventDefault(); // Prevent navigation on final click
-        triggerPuzzlePhase2();
-        userCombo = []; // Reset for potential replay
-      }
-    });
-  });
-
-  function triggerPuzzlePhase2() {
-    // Play celebration sound for first puzzle completion
-    playCelebrationSound(celebrationSound1);
-    
-    // Full Screen Confetti - from far sides toward center + top dropdown
-    const duration = 3 * 1000;
-    const end = Date.now() + duration;
-
-    (function frame() {
-      // Far left side shooting toward center
-      confetti({ 
-        particleCount: 4, 
-        angle: 75, 
-        spread: 60, 
-        origin: { x: 0, y: 0.6 }, 
-        colors: ['#d4af37', '#ffffff'] 
-      });
-      // Far right side shooting toward center
-      confetti({ 
-        particleCount: 4, 
-        angle: 105, 
-        spread: 60, 
-        origin: { x: 1, y: 0.6 }, 
-        colors: ['#d4af37', '#ffffff'] 
-      });
-      // Top center dropdown confetti
-      confetti({
-        particleCount: 5,
-        angle: 90,
-        spread: 120,
-        origin: { x: 0.5, y: 0 },
-        colors: ['#d4af37', '#ffffff'],
-        gravity: 1.2
-      });
-      if (Date.now() < end) requestAnimationFrame(frame);
-    }());
-
-    // Show stealth pad after confetti
-    setTimeout(() => {
-      const pad = document.getElementById('digit-pass-area');
-      pad.style.display = 'block';
-      setTimeout(() => {
-        pad.classList.add('show');
-        document.getElementById('p1').focus();
-      }, 50);
-      
-      // Auto-hide pin pad after 3 minutes of inactivity, forcing re-entry of sequence
-      setTimeout(() => {
-        pad.classList.add('hide-away');
-        setTimeout(() => {
-          pad.style.display = 'none';
-          // Reset for potential replay
-          userCombo = [];
-          pInputs.forEach(i => { 
-            i.value = ''; 
-            i.disabled = false;
-            i.classList.remove('error');
-          });
-          document.getElementById('lock-msg').style.display = 'none';
-        }, 600);
-      }, 3 * 60 * 1000); // 3 minutes
-    }, 2000);
-  }
-
-  // --- PIN PAD LOGIC ---
-  const masterKey = ['Q', '9', '@', 'p'];
-  const pInputs = [
-    document.getElementById('p1'), 
-    document.getElementById('p2'), 
-    document.getElementById('p3'), 
-    document.getElementById('p4')
-  ];
-
-  pInputs.forEach((input, index) => {
-    input.addEventListener('input', () => {
-      if (input.value.length === 1 && index < 3) {
-        pInputs[index + 1].focus();
-      }
-      
-      const currentEntry = pInputs.map(i => i.value);
-      if (currentEntry.filter(x => x !== "").length === 4) {
-        // Check password
-        if (currentEntry.join('') === masterKey.join('')) {
-          unlockVault();
-        } else {
-          // ONE TRY LOCKOUT with animation
-          pInputs.forEach(i => { 
-            i.classList.add('error');
-            i.disabled = true; 
-          });
-          document.getElementById('lock-msg').style.display = 'block';
-          
-          // Auto-hide the pin pad after 10 seconds on lockout
-          setTimeout(() => {
-            const pad = document.getElementById('digit-pass-area');
-            pad.classList.add('hide-away');
-            setTimeout(() => {
-              pad.style.display = 'none';
-            }, 600);
-          }, 10000);
-        }
-      }
-    });
-
-    // Allow backspace navigation
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Backspace' && input.value === '' && index > 0) {
-        pInputs[index - 1].focus();
-      }
-    });
-  });
-
-  function unlockVault() {
-    // Only play celebration sound if no celebration is currently playing
-    if (!currentCelebration || currentCelebration.paused) {
-      playCelebrationSound(celebrationSound2);
-    }
-    
-    // Hide the pin pad with cool animation first
-    const pad = document.getElementById('digit-pass-area');
-    pad.classList.add('hide-away');
-    
-    setTimeout(() => {
-      pad.style.display = 'none';
-      
-      // Then reveal the vault
-      const vault = document.getElementById('secret-vault-section');
-      vault.style.display = 'block';
-      isAutoScrolling = true;
-      
-      setTimeout(() => {
-        vault.classList.add('show');
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-        setTimeout(() => isAutoScrolling = false, 1500);
-      }, 100);
-      
-      // Auto-lock vault after 15 minutes
-      setTimeout(() => {
-        location.reload();
-      }, 15 * 60 * 1000); // 15 minutes in milliseconds
-    }, 600);
-  }
-
-  // Vault auto-lock: both 15-minute timer AND manual scroll-away
-  // Only locks when user manually scrolls vault COMPLETELY out of view
-  window.addEventListener('scroll', () => {
-    if (isAutoScrolling) return;
-    const vault = document.getElementById('secret-vault-section');
-    if (vault.style.display === 'block') {
-      const vaultRect = vault.getBoundingClientRect();
-      // Lock only when the ENTIRE vault (including bottom) is above the viewport
-      // This means vault is completely scrolled out of view
-      const vaultCompletelyAboveView = vaultRect.bottom < 0;
-      
-      if (vaultCompletelyAboveView) {
-        location.reload(); 
-      }
-    }
+    hasManuallyClicked = true;
+    clearInterval(autoSwapInterval);
+    swapImages();
   });
 </script>
 
