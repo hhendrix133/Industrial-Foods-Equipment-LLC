@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Access Restoration - Industrial Equipment & Foods</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Access restoration system.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+<link rel="shortcut icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+
+<!-- Cookie Helper Functions -->
+<script>
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+// Remove ban and set access granted
+deleteCookie("banned");
+setCookie("accessGranted", "true", 365);
+</script>
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    background: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .unlock-container {
+    max-width: 650px;
+    border: 6px solid #d4af37;
+    background: #0b0b0b;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 
+      0 0 40px rgba(212, 175, 55, 0.4),
+      inset 0 0 60px rgba(212, 175, 55, 0.15);
+    animation: success-pulse 1.5s ease-in-out;
+  }
+
+  @keyframes success-pulse {
+    0% {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.02);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  h1 {
+    color: #d4af37;
+    font-size: 2.5em;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .unlock-message {
+    color: #bbb;
+    font-size: 1.15em;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  .status-box {
+    border: 2px solid #d4af37;
+    padding: 25px 20px;
+    margin: 30px 0;
+    background: rgba(212, 175, 55, 0.08);
+  }
+
+  .status-box p {
+    color: #aaa;
+    font-size: 0.95em;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .status-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .success-code {
+    display: inline-block;
+    background: #d4af37;
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .proceed-button {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 15px 50px;
+    background: #d4af37;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 1.5px;
+    border: 3px solid #d4af37;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+    cursor: pointer;
+  }
+
+  .proceed-button:hover {
+    background: #fff;
+    border-color: #d4af37;
+    box-shadow: 
+      0 0 30px rgba(212, 175, 55, 0.6),
+      0 0 40px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .footer-text {
+    color: #666;
+    font-size: 0.85em;
+    margin-top: 30px;
+    font-style: italic;
+  }
+
+  .company-name {
+    color: #d4af37;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+  }
+
+  .warning-text {
+    color: #888;
+    font-size: 0.85em;
+    margin-top: 20px;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+
+    .unlock-container {
+      padding: 35px 25px;
+      border-width: 4px;
+      max-height: 95vh;
+      overflow-y: auto;
+    }
+
+    h1 {
+      font-size: 1.7em;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .unlock-message {
+      font-size: 0.95em;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .status-box {
+      padding: 18px 15px;
+      margin: 20px 0;
+    }
+
+    .status-box p {
+      font-size: 0.85em;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .success-code {
+      font-size: 0.9em;
+      padding: 6px 15px;
+      margin-top: 10px;
+    }
+
+    .proceed-button {
+      padding: 12px 35px;
+      font-size: 0.95em;
+      margin-top: 25px;
+    }
+
+    .warning-text {
+      font-size: 0.8em;
+      margin-top: 15px;
+    }
+
+    .footer-text {
+      font-size: 0.75em;
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+
+    .unlock-container {
+      padding: 25px 18px;
+      border-width: 3px;
+      max-height: 96vh;
+    }
+
+    h1 {
+      font-size: 1.4em;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .unlock-message {
+      font-size: 0.85em;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .status-box {
+      padding: 15px 12px;
+      margin: 15px 0;
+    }
+
+    .status-box p {
+      font-size: 0.8em;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .success-code {
+      font-size: 0.85em;
+      padding: 5px 12px;
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    .proceed-button {
+      padding: 10px 28px;
+      font-size: 0.9em;
+      margin-top: 20px;
+      letter-spacing: 1px;
+    }
+
+    .warning-text {
+      font-size: 0.75em;
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    .footer-text {
+      font-size: 0.7em;
+      margin-top: 15px;
+      line-height: 1.4;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="unlock-container">
+  
+  <h1>Account Access Restored</h1>
+  
+  <div class="unlock-message">
+    Your access to <span class="company-name">Industrial Equipment & Foods LLC</span> 
+    systems has been <strong>successfully restored</strong>.
+  </div>
+
+  <div class="status-box">
+    <p><strong>Action Completed:</strong> Ban Removal Protocol Executed</p>
+    <p><strong>Access Level:</strong> Full Site Access Restored</p>
+    <p><strong>Status:</strong> You may now return to the homepage</p>
+    <p><strong>Processed:</strong> <span id="unlock-date"></span></p>
+    
+    <div class="success-code">CODE: IEF-RESTORED</div>
+  </div>
+
+  <a href="index.html" class="proceed-button">PROCEED</a>
+
+  <div class="warning-text">
+    Please note: Future violations may result in reinstatement of access restrictions.
+  </div>
+
+  <div class="footer-text">
+    "Innovation through second chances."<br>
+    — <span class="company-name">Industrial Equipment & Foods LLC</span> Access Management
+  </div>
+</div>
+
+<script>
+  const now = new Date();
+  document.getElementById('unlock-date').textContent = 
+    now.toLocaleDateString(undefined, { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+</script>
+
+</body>
+</html>
