@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Account Suspended - Industrial Equipment & Foods</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="description" content="Account has been suspended.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+<link rel="shortcut icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    background: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .ban-container {
+    max-width: 700px;
+    border: 6px solid #d4af37;
+    background: #0b0b0b;
+    padding: 50px 40px;
+    text-align: center;
+    box-shadow: 
+      0 0 30px rgba(212, 175, 55, 0.3),
+      inset 0 0 50px rgba(212, 175, 55, 0.1);
+    animation: pulse-border 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% {
+      box-shadow: 
+        0 0 30px rgba(212, 175, 55, 0.3),
+        inset 0 0 50px rgba(212, 175, 55, 0.1);
+    }
+    50% {
+      box-shadow: 
+        0 0 50px rgba(212, 175, 55, 0.5),
+        inset 0 0 70px rgba(212, 175, 55, 0.2);
+    }
+  }
+
+  h1 {
+    color: #d4af37;
+    font-size: 2.8em;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 600;
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .ban-message {
+    color: #bbb;
+    font-size: 1.2em;
+    line-height: 1.8;
+    margin-bottom: 30px;
+  }
+
+  .ban-details {
+    border-top: 2px solid #d4af37;
+    border-bottom: 2px solid #d4af37;
+    padding: 25px 20px;
+    margin: 30px 0;
+    background: rgba(212, 175, 55, 0.05);
+  }
+
+  .ban-details p {
+    color: #d4af37;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+  }
+
+  .ban-details p:last-child {
+    margin-bottom: 0;
+  }
+
+  .violation-code {
+    display: inline-block;
+    background: #d4af37;
+    color: #000;
+    padding: 8px 20px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    margin-top: 15px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+  }
+
+  .additional-info {
+    color: #d4af37;
+    font-size: 0.9em;
+    line-height: 1.6;
+    margin-top: 25px;
+  }
+
+  .footer-text {
+    color: #d4af37;
+    font-size: 0.9em;
+    margin-top: 30px;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .company-name {
+    color: #d4af37;
+    font-weight: bold;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 768px) {
+    .ban-container {
+      padding: 35px 25px;
+      border-width: 4px;
+    }
+
+    h1 {
+      font-size: 2.2em;
+      letter-spacing: 2px;
+    }
+
+    .ban-message {
+      font-size: 1em;
+    }
+
+    .violation-code {
+      font-size: 1em;
+      padding: 6px 15px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ban-container {
+      padding: 25px 20px;
+      border-width: 3px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      letter-spacing: 1px;
+    }
+
+    .ban-message {
+      font-size: 0.95em;
+    }
+
+    .footer-text {
+      font-size: 0.8em;
+    }
+
+    .additional-info {
+      font-size: 0.85em;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="ban-container">
+  
+  <h1>Account Suspended</h1>
+  
+  <div class="ban-message">
+    Your access to <span class="company-name">Industrial Equipment & Foods LLC</span> 
+    systems has been revoked due to <strong>automated ban</strong> protocol.
+  </div>
+
+  <div class="ban-details">
+    <p><strong>Security Protocol:</strong> Automated Ban System</p>
+    <p><strong>Status:</strong> Access Restricted</p>
+    <p><strong>Date:</strong> <span id="ban-date"></span></p>
+    
+    <div class="violation-code">CODE: IEF-1897-BANNED</div>
+  </div>
+
+  <p class="additional-info">
+    All attempts to access our digital infrastructure will be automatically blocked. 
+    Your session has been logged and reported to our security division.
+  </p>
+
+  <div class="footer-text">
+    "Even over a century later, we never fail to protect our assets."<br>
+    — <span class="company-name">Industrial Equipment & Foods LLC</span> Security Division
+  </div>
+</div>
+
+<script>
+  const now = new Date();
+  document.getElementById('ban-date').textContent = 
+    now.toLocaleDateString(undefined, { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+</script>
+
+</body>
+</html>
