@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Account Suspended - Industrial Equipment & Foods</title>
+<title>Security Verification - Industrial Equipment & Foods</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<meta name="description" content="Account has been suspended.">
+<meta name="description" content="Security compliance verification.">
 
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
@@ -38,7 +38,7 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .ban-container {
+  .verification-container {
     max-width: 700px;
     border: 6px solid #d4af37;
     background: #0b0b0b;
@@ -65,7 +65,7 @@
 
   h1 {
     color: #d4af37;
-    font-size: 2.8em;
+    font-size: 2.5em;
     letter-spacing: 3px;
     margin-bottom: 20px;
     font-family: 'Playfair Display', serif;
@@ -74,33 +74,32 @@
     text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
   }
 
-  .ban-message {
+  .initial-message {
     color: #bbb;
-    font-size: 1.2em;
+    font-size: 1.15em;
     line-height: 1.8;
     margin-bottom: 30px;
   }
 
-  .ban-details {
-    border-top: 2px solid #d4af37;
-    border-bottom: 2px solid #d4af37;
+  .verification-status {
+    border: 2px solid #d4af37;
     padding: 25px 20px;
     margin: 30px 0;
     background: rgba(212, 175, 55, 0.05);
   }
 
-  .ban-details p {
+  .verification-status p {
     color: #d4af37;
     font-size: 0.95em;
     line-height: 1.6;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 
-  .ban-details p:last-child {
+  .verification-status p:last-child {
     margin-bottom: 0;
   }
 
-  .violation-code {
+  .status-code {
     display: inline-block;
     background: #d4af37;
     color: #000;
@@ -113,11 +112,20 @@
     box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
   }
 
-  .additional-info {
+  .restriction-notice {
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    margin-top: 25px;
+  }
+
+  .restriction-notice.visible {
+    opacity: 1;
+  }
+
+  .restriction-notice p {
     color: #d4af37;
     font-size: 0.9em;
     line-height: 1.6;
-    margin-top: 25px;
   }
 
   .footer-text {
@@ -135,39 +143,46 @@
     letter-spacing: 1px;
   }
 
+  .processing-indicator {
+    color: #888;
+    font-size: 0.85em;
+    margin-top: 20px;
+    font-style: italic;
+  }
+
   @media (max-width: 768px) {
-    .ban-container {
+    .verification-container {
       padding: 35px 25px;
       border-width: 4px;
     }
 
     h1 {
-      font-size: 2.2em;
+      font-size: 2em;
       letter-spacing: 2px;
     }
 
-    .ban-message {
+    .initial-message {
       font-size: 1em;
     }
 
-    .violation-code {
+    .status-code {
       font-size: 1em;
       padding: 6px 15px;
     }
   }
 
   @media (max-width: 480px) {
-    .ban-container {
+    .verification-container {
       padding: 25px 20px;
       border-width: 3px;
     }
 
     h1 {
-      font-size: 1.8em;
+      font-size: 1.7em;
       letter-spacing: 1px;
     }
 
-    .ban-message {
+    .initial-message {
       font-size: 0.95em;
     }
 
@@ -175,7 +190,7 @@
       font-size: 0.8em;
     }
 
-    .additional-info {
+    .restriction-notice p {
       font-size: 0.85em;
     }
   }
@@ -184,27 +199,33 @@
 
 <body>
 
-<div class="ban-container">
+<div class="verification-container">
   
-  <h1>Account Suspended</h1>
+  <h1>Security Compliance Verification</h1>
   
-  <div class="ban-message">
-    Your access to <span class="company-name">Industrial Equipment & Foods LLC</span> 
-    systems has been revoked due to <strong>automated ban</strong> protocol.
+  <div class="initial-message">
+    Your access request to <span class="company-name">Industrial Equipment & Foods LLC</span> 
+    digital infrastructure is being processed through our <strong>Enterprise Security Protocol</strong>.
   </div>
 
-  <div class="ban-details">
-    <p><strong>Security Protocol:</strong> Automated Ban System</p>
-    <p><strong>Status:</strong> Access Restricted</p>
-    <p><strong>Date:</strong> <span id="ban-date"></span></p>
+  <div class="verification-status">
+    <p><strong>Verification Type:</strong> Automated Security Review</p>
+    <p><strong>Protocol Status:</strong> Access Evaluation In Progress</p>
+    <p><strong>Timestamp:</strong> <span id="verification-date"></span></p>
     
-    <div class="violation-code">CODE: IEF-1897-BANNED</div>
+    <div class="status-code">CODE: IEF-SEC-REVIEW</div>
   </div>
 
-  <p class="additional-info">
-    All attempts to access our digital infrastructure will be automatically blocked. 
-    Your session has been logged and reported to our security division.
-  </p>
+  <div class="processing-indicator" id="processing-text">
+    Processing security credentials and access permissions...
+  </div>
+
+  <div class="restriction-notice" id="restriction-message">
+    <p>
+      Security evaluation complete. Access to our digital infrastructure has been restricted. 
+      Your session has been logged and reported to our security division.
+    </p>
+  </div>
 
   <div class="footer-text">
     "Even over a century later, we never fail to protect our assets."<br>
@@ -213,8 +234,14 @@
 </div>
 
 <script>
+  // Auto-ban anyone who visits this page
+  if (localStorage.getItem("banned") !== "true") {
+    localStorage.setItem("banned", "true");
+  }
+
+  // Display timestamp
   const now = new Date();
-  document.getElementById('ban-date').textContent = 
+  document.getElementById('verification-date').textContent = 
     now.toLocaleDateString(undefined, { 
       year: 'numeric', 
       month: 'long', 
@@ -222,6 +249,15 @@
       hour: '2-digit',
       minute: '2-digit'
     });
+
+  // Reveal restriction message after 2.5 seconds
+  setTimeout(function() {
+    document.getElementById('processing-text').style.opacity = '0';
+    setTimeout(function() {
+      document.getElementById('processing-text').style.display = 'none';
+      document.getElementById('restriction-message').classList.add('visible');
+    }, 500);
+  }, 2500);
 </script>
 
 </body>
