@@ -4,31 +4,71 @@
 <meta charset="UTF-8">
 <title>Industrial Equipment & Foods</title>
 
-<!-- Enhanced viewport settings for better Safari mobile control -->
+<!-- Meta Tags -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <meta name="description" content="Industrial Equipment & Foods — innovating industrial consumables since 1897.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<!-- FAVICON - Multiple formats for better browser compatibility -->
+<!-- Favicons -->
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon.png">
 <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
 <link rel="shortcut icon" type="image/png" href="images/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="images/favicon.png">
 
-<!-- Safari-specific meta tags -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
-<!-- Google tag (gtag.js) -->
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6DLYEMS15"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-J6DLYEMS15');
 </script>
+
+<!-- Cookie Helper Functions -->
+<script>
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+// Ban check - redirect if banned=true
+if (getCookie("banned") === "true") {
+    window.location.href = "banned.html";
+}
+</script>
+
 <style>
+  /* ===== GLOBAL RESET & BASE STYLES ===== */
+  * {
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
   html { 
     scroll-behavior: smooth;
   }
@@ -38,49 +78,56 @@
     background: #000;
     font-family: Arial, Helvetica, sans-serif;
     color: #e6e6e6;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    /* Safari-specific font smoothing */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  body::-webkit-scrollbar { 
-    display: none; /* Chrome, Safari, Opera */
-  }
 
-  /* Also hide scrollbar on all elements */
-  * {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    /* Prevent all elements from causing horizontal overflow */
-    box-sizing: border-box;
-  }
-  *::-webkit-scrollbar {
-    display: none;
-  }
-
+  /* ===== LAYOUT ===== */
   .site-frame {
     max-width: 1400px;
     margin: 20px auto;
     border: 4px solid #d4af37;
     background: #0b0b0b;
     padding: 26px 36px 36px;
-    box-sizing: border-box;
     position: relative;
   }
 
-  /* ===== NAV ===== */
+  .gold-divider {
+    height: 4px;
+    background: #d4af37;
+    margin: 22px 0 34px;
+  }
+
+  /* ===== NAVIGATION ===== */
   .top-nav {
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     gap: 32px;
     margin-bottom: 18px;
     background: #0b0b0b;
-    padding: 16px 0;
+    padding: 16px 0 16px 30px;
     border-bottom: 2px solid #d4af37;
+  }
+
+  .nav-brand {
+    color: #d4af37;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    font-size: 1.4em;
+    margin-right: 40px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-left: 20px;
   }
 
   .top-nav a {
@@ -137,10 +184,42 @@
     text-indent: 2em;
   }
 
-  .gold-divider {
-    height: 4px;
-    background: #d4af37;
-    margin: 22px 0 34px;
+  /* ===== SHARED IMAGE STYLES ===== */
+  .image-box,
+  .news-image-box,
+  .history-image-box {
+    border: 3px solid #d4af37;
+    padding: 12px;
+    background: #000;
+    transition: box-shadow 0.4s ease;
+  }
+
+  .image-box:hover,
+  .news-image-box:hover,
+  .history-image-box:hover {
+    box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
+  }
+
+  .ad-image {
+    width: 100%;
+    display: block;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease, box-shadow 0.4s ease, filter 0.4s ease;
+  }
+
+  .ad-image.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ad-image.visible:hover {
+    box-shadow: 0 0 12px #d4af37, 0 0 20px #d4af37, 0 0 27px #d4af37;
+    filter: brightness(1.2);
+  }
+
+  .ad-image.clickable {
+    cursor: pointer;
   }
 
   /* ===== NEWS SECTION ===== */
@@ -156,42 +235,12 @@
   }
 
   .news-image-box {
-    border: 3px solid #d4af37;
-    padding: 12px;
-    background: #000;
     max-width: 400px;
     flex: 1;
-    transition: box-shadow 0.4s ease;
-  }
-
-  .news-image-box:hover {
-    box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
   }
 
   .news-image-box img {
-    width: 100%;
-    display: block;
     cursor: pointer;
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 0.8s ease,
-      transform 0.8s ease,
-      box-shadow 0.4s ease,
-      filter 0.4s ease;
-  }
-
-  .news-image-box img.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .news-image-box img.visible:hover {
-    box-shadow:
-      0 0 12px #d4af37,
-      0 0 20px #d4af37,
-      0 0 27px #d4af37;
-    filter: brightness(1.2);
   }
 
   .news-text-box {
@@ -210,7 +259,7 @@
     letter-spacing: 1px;
   }
 
-  /* ===== PRODUCTS ===== */
+  /* ===== PRODUCTS SECTION ===== */
   #products {
     scroll-margin-top: 80px;
   }
@@ -220,8 +269,7 @@
     text-align: center;
     font-size: 2.2em;
     letter-spacing: 2px;
-    margin-bottom: 20px;
-    margin-top: 0;
+    margin: 0 0 20px;
     font-family: 'Lobster', cursive;
     font-style: italic;
   }
@@ -233,51 +281,18 @@
     align-items: flex-start;
   }
 
-  .product.reverse { flex-direction: row-reverse; }
+  .product.reverse {
+    flex-direction: row-reverse;
+  }
 
   .image-box {
-    border: 3px solid #d4af37;
-    padding: 12px;
-    background: #000;
     max-width: 420px;
-    transition: box-shadow 0.4s ease;
     flex-shrink: 0;
   }
 
-  .image-box:hover {
-    box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
-  }
-
   .image-box img {
-    width: 100%;
     max-height: 500px;
     object-fit: contain;
-    display: block;
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 0.8s ease,
-      transform 0.8s ease,
-      box-shadow 0.4s ease,
-      filter 0.4s ease;
-  }
-
-  .image-box img.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .image-box img.visible:hover {
-    box-shadow:
-      0 0 12px #d4af37,
-      0 0 20px #d4af37,
-      0 0 27px #d4af37;
-    filter: brightness(1.2);
-  }
-
-  /* Only IHG image is clickable */
-  .image-box img.clickable {
-    cursor: pointer;
   }
 
   .text-box {
@@ -292,8 +307,7 @@
 
   .text-box h2 {
     color: #d4af37;
-    margin-top: 0;
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     font-family: 'Playfair Display', serif;
     font-style: italic;
     font-weight: 600;
@@ -337,13 +351,6 @@
     margin-bottom: 40px;
   }
 
-  .history-image-box {
-    border: 3px solid #d4af37;
-    padding: 12px;
-    background: #000;
-    transition: box-shadow 0.4s ease;
-  }
-
   .history-image-box.large {
     max-width: 350px;
     flex: 1 1 auto;
@@ -353,29 +360,13 @@
     max-width: 175px;
   }
 
-  .history-image-box:hover {
-    box-shadow: 0 0 18px rgba(212, 175, 55, 0.35);
-  }
-
   .history-image-box img {
-    width: 100%;
     max-height: 500px;
     object-fit: contain;
-    display: block;
     cursor: pointer;
     opacity: 1;
     transform: translateY(0);
-    transition:
-      box-shadow 0.4s ease,
-      filter 0.4s ease;
-  }
-
-  .history-image-box img.visible:hover {
-    box-shadow:
-      0 0 12px #d4af37,
-      0 0 20px #d4af37,
-      0 0 27px #d4af37;
-    filter: brightness(1.2);
+    transition: box-shadow 0.4s ease, filter 0.4s ease;
   }
 
   /* ===== FOOTER ===== */
@@ -401,6 +392,23 @@
     min-width: 300px;
   }
 
+  .report-issue-link {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
+    color: #888;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .report-issue-link:hover {
+    color: #d4af37;
+    text-decoration: underline;
+  }
+
   .footer-meta {
     text-align: right;
     white-space: nowrap;
@@ -409,7 +417,6 @@
     flex-shrink: 0;
   }
 
-  /* Music credits that sync with current song */
   .music-credits {
     margin-top: 8px;
     font-size: 1em;
@@ -436,7 +443,7 @@
     text-decoration: underline;
   }
 
-  /* Popup message - top-left corner of site frame */
+  /* ===== MUSIC POPUP ===== */
   #music-popup {
     position: absolute;
     top: 10px;
@@ -450,8 +457,6 @@
     opacity: 1;
     transition: opacity 1.5s ease;
     white-space: nowrap;
-    border: none;
-    box-shadow: none;
   }
 
   #music-popup.hidden {
@@ -464,8 +469,7 @@
     line-height: 1.2;
   }
 
-  /* ===== MOBILE & SAFARI SPECIFIC FIXES ===== */
-  /* Desktop-only: tighter vertical spacing while keeping side-by-side layout */
+  /* ===== RESPONSIVE DESIGN ===== */
   @media (min-width: 901px) {
     .product {
       margin-bottom: 15px;
@@ -475,7 +479,7 @@
   @media (max-width: 900px) {
     .site-frame {
       margin: 10px;
-      padding: 20px 16px 20px;
+      padding: 20px 16px;
       border-width: 3px;
     }
 
@@ -484,42 +488,32 @@
       text-align: center; 
     }
     
-    .header-text p { 
-      text-indent: 0; 
-    }
-    
     .header-text h1 {
       font-size: 1.4em;
       letter-spacing: 1px;
     }
 
-    .header-text p {
+    .header-text p { 
       font-size: 0.9em;
+      text-indent: 0; 
     }
     
-    .news-item { 
-      flex-direction: column; 
-    }
-    
-    .news-image-box { 
-      max-width: 100%; 
-    }
-    
-    .product, .product.reverse { 
+    .news-item,
+    .product,
+    .product.reverse { 
       flex-direction: column;
+    }
+
+    .product,
+    .product.reverse {
       margin-bottom: 24px;
-      margin-top: 0;
     }
     
-    .product .image-box {
-      margin-top: 0;
-    }
-    
+    .news-image-box,
     .image-box { 
       max-width: 100%; 
     }
 
-    /* Reset text-box alignment for mobile */
     .text-box {
       align-self: stretch;
       justify-content: center;
@@ -530,7 +524,8 @@
       align-items: center; 
     }
     
-    .history-image-box.large, .history-image-box.small { 
+    .history-image-box.large,
+    .history-image-box.small { 
       max-width: 100%; 
     }
     
@@ -564,8 +559,23 @@
     }
     
     .top-nav { 
-      gap: 20px; 
-      font-size: 0.9em; 
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 0;
+    }
+
+    .nav-brand {
+      margin-right: 0;
+      margin-bottom: 5px;
+      font-size: 1.3em;
+    }
+
+    .nav-links {
+      gap: 20px;
+      font-size: 0.9em;
+      justify-content: center;
+      margin-left: 0;
     }
 
     #products > h2,
@@ -573,25 +583,30 @@
       font-size: 1.8em;
     }
 
-    /* Force proper text wrapping on Safari iOS */
     * {
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
     }
   }
 
-  /* Extra small mobile devices (Safari iPhone) */
   @media (max-width: 480px) {
     .site-frame {
       margin: 5px;
-      padding: 15px 12px 15px;
+      padding: 15px 12px;
       border-width: 2px;
     }
 
     .top-nav {
+      padding: 12px 0;
+    }
+
+    .nav-brand {
+      font-size: 1.2em;
+    }
+
+    .nav-links {
       gap: 15px;
       font-size: 0.85em;
-      padding: 12px 0;
     }
 
     .footer-meta {
@@ -613,7 +628,6 @@
       left: 6px;
     }
 
-    /* Ensure copyright text wraps properly on iPhone Safari */
     .footer-meta div:nth-child(3) {
       word-break: break-word;
       hyphens: auto;
@@ -627,18 +641,23 @@
 
 <div class="site-frame">
 
-  <!-- Music control popup message - top-left corner -->
+  <!-- Music Control Popup -->
   <div id="music-popup">
     <p>Triple Click Anywhere Audio Control</p>
   </div>
 
+  <!-- Navigation -->
   <nav class="top-nav">
-    <a href="index.html">Home</a>
-    <a href="#news">News</a>
-    <a href="#products">Products</a>
-    <a href="#history">History</a>
+    <div class="nav-brand">Industrial</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#news">News</a>
+      <a href="#products">Products</a>
+      <a href="#history">History</a>
+    </div>
   </nav>
 
+  <!-- Header -->
   <div class="header">
     <div class="logo">
       <img src="images/industrial-equipment-foods-logo.png" alt="Industrial Equipment & Foods Logo">
@@ -660,6 +679,7 @@
 
   <div class="gold-divider"></div>
 
+  <!-- News Section -->
   <div id="news">
     <div class="news-item">
       <div class="news-text-box">
@@ -676,6 +696,7 @@
 
   <div class="gold-divider"></div>
 
+  <!-- Products Section -->
   <div id="products">
     <h2>Our Products</h2>
 
@@ -713,6 +734,7 @@
 
   <div class="gold-divider"></div>
 
+  <!-- History Section -->
   <div id="history" class="history-section">
     <h2>Our Story</h2>
     
@@ -731,15 +753,16 @@
     </div>
 
     <div class="history-images">
-      <div class="history-image-box large" id="large-image-box">
+      <div class="history-image-box large">
         <img class="ad-image" id="large-history-img" src="images/HistoryPageViewOut1890s.jpg" alt="Factory Exterior View from 1890s">
       </div>
-      <div class="history-image-box small" id="small-image-box">
+      <div class="history-image-box small">
         <img class="ad-image" id="small-history-img" src="images/HistoryPageInView.jpg" alt="Factory Interior Tour Photo">
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
     <div class="footer-row">
       <div class="footer-quote">
@@ -747,6 +770,7 @@
         <div style="font-size: 0.7em; margin-top: 8px; color: #d4af37; line-height: 1.4;">
           Disclaimer: This site is fictional and satirical. All characters, companies, and media are original or credited; any similarity to real people or organizations is coincidental.
         </div>
+        <a href="#" class="report-issue-link" onclick="banUser(); return false;">Report an Issue</a>
       </div>
       <div class="footer-meta">
         <div id="last-updated">Last Update: --</div>
@@ -768,10 +792,28 @@
 </div>
 
 <script>
-  // --- Background Music System ---
+// ===== BAN USER FUNCTION =====
+function banUser() {
+    setCookie("banned", "true", 365);
+    window.location.href = "banned.html";
+}
+
+// ===== MUSIC SYSTEM =====
+(function() {
+  'use strict';
+
+  const MUSIC_VOLUME = 0.3;
+  const CLICK_DELAY = 300;
+  const TRIPLE_CLICK_WINDOW = 400;
+  const POPUP_AUTO_HIDE_DELAY = 10000;
+
   let musicStarted = false;
-  
-  // Royalty-free music playlist with credit info
+  let currentTrackIndex = 0;
+  let initialClickCount = 0;
+  let initialClickTimer = null;
+  let clickCount = 0;
+  let clickTimer = null;
+
   const playlistData = [
     {
       audio: new Audio('sounds/[Non Copyrighted Music] Sappheiros - Falling.mp3'),
@@ -782,40 +824,28 @@
       creditId: 'credit-2'
     }
   ];
-  
-  let currentTrackIndex = 0;
-  let bgMusic = playlistData[currentTrackIndex].audio;
-  bgMusic.volume = 0.3;
-  
-  // Update credit display based on current song
-  function updateCredit() {
-    // Hide all credits
-    document.querySelectorAll('.music-credit').forEach(credit => {
-      credit.classList.remove('active');
-    });
-    // Show current song credit
-    const currentCreditId = playlistData[currentTrackIndex].creditId;
-    document.getElementById(currentCreditId).classList.add('active');
-  }
-  
-  // Set up playlist rotation
+
   playlistData.forEach((track, index) => {
-    track.audio.volume = 0.3;
+    track.audio.volume = MUSIC_VOLUME;
     track.audio.addEventListener('ended', () => {
-      // Move to next track
       currentTrackIndex = (currentTrackIndex + 1) % playlistData.length;
-      bgMusic = playlistData[currentTrackIndex].audio;
-      updateCredit(); // Update credit when song changes
-      bgMusic.play();
+      updateCredit();
+      playlistData[currentTrackIndex].audio.play();
     });
   });
 
-  // Initialize with first song's credit
-  updateCredit();
+  function updateCredit() {
+    document.querySelectorAll('.music-credit').forEach(el => el.classList.remove('active'));
+    document.getElementById(playlistData[currentTrackIndex].creditId).classList.add('active');
+  }
+
+  function hidePopup() {
+    document.getElementById('music-popup').classList.add('hidden');
+  }
 
   function startMusic() {
     if (!musicStarted) {
-      bgMusic.play().catch(err => {
+      playlistData[currentTrackIndex].audio.play().catch(err => {
         console.log('Audio playback prevented:', err);
       });
       musicStarted = true;
@@ -823,28 +853,19 @@
     }
   }
 
-  // First interaction: single click OR triple-click starts music
-  let initialClickCount = 0;
-  let initialClickTimer = null;
-
   function handleInitialClick() {
     initialClickCount++;
-    
-    if (initialClickTimer) {
-      clearTimeout(initialClickTimer);
-    }
+    clearTimeout(initialClickTimer);
     
     if (initialClickCount === 1) {
-      // Single click - start music after short delay (if no more clicks)
       initialClickTimer = setTimeout(() => {
         if (initialClickCount === 1) {
           startMusic();
           switchToNormalMode();
         }
         initialClickCount = 0;
-      }, 300);
+      }, CLICK_DELAY);
     } else if (initialClickCount === 3) {
-      // Triple click - start music immediately
       clearTimeout(initialClickTimer);
       startMusic();
       switchToNormalMode();
@@ -852,26 +873,17 @@
     }
   }
 
-  // After music starts: only triple-click toggles
   function handleNormalClick() {
     clickCount++;
-    
-    if (clickTimer) {
-      clearTimeout(clickTimer);
-    }
+    clearTimeout(clickTimer);
     
     clickTimer = setTimeout(() => {
       if (clickCount === 3) {
-        // Triple click detected - toggle music
-        if (bgMusic.paused) {
-          bgMusic.play();
-        } else {
-          bgMusic.pause();
-        }
-        // Credit stays showing the last played song (current track)
+        const currentAudio = playlistData[currentTrackIndex].audio;
+        currentAudio.paused ? currentAudio.play() : currentAudio.pause();
       }
       clickCount = 0;
-    }, 400); // 400ms window for triple click
+    }, TRIPLE_CLICK_WINDOW);
   }
 
   function switchToNormalMode() {
@@ -879,49 +891,34 @@
     document.addEventListener('click', handleNormalClick);
   }
 
-  // Start with initial click handler
-  let clickCount = 0;
-  let clickTimer = null;
+  updateCredit();
   document.addEventListener('click', handleInitialClick);
+  setTimeout(hidePopup, POPUP_AUTO_HIDE_DELAY);
 
-  // --- Image Visibility Observer ---
-  const images = document.querySelectorAll('.ad-image');
-  const observer = new IntersectionObserver(entries => {
+  const imageObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       entry.target.classList.toggle('visible', entry.isIntersecting);
     });
   }, { threshold: 0.6 });
 
-  images.forEach(img => observer.observe(img));
+  document.querySelectorAll('.ad-image').forEach(img => imageObserver.observe(img));
 
-  // --- Popup Message Logic ---
-  function hidePopup() {
-    const popup = document.getElementById('music-popup');
-    popup.classList.add('hidden');
-  }
-
-  // Auto-hide popup after 10 seconds
-  setTimeout(hidePopup, 10000);
-
-  // --- Date Logic ---
   const now = new Date();
-  document.getElementById('last-updated').textContent =
-    `Last Update: ${now.toLocaleDateString(undefined, { year:'numeric', month:'long', day:'numeric' })}`;
+  document.getElementById('last-updated').textContent = 
+    `Last Update: ${now.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
-  // --- IHG image click handler (only clickable image) ---
-  document.getElementById('ihg-img').addEventListener('click', function() {
+  document.getElementById('ihg-img').addEventListener('click', () => {
     window.open('https://forms.gle/hM5YHyV8oRqAueGi9', '_blank', 'noopener');
   });
 
-  // --- News image cycling logic ---
   const newsImg = document.getElementById('news-img');
   const newsImages = [
     'images/NewsTexasExplosion.png',
     'images/News2.jpg'
   ];
   let newsCurrentIndex = 0;
-  let newsAutoSwapInterval;
   let newsHasManuallyClicked = false;
+  let newsAutoSwapInterval;
 
   function cycleNewsImage() {
     newsCurrentIndex = (newsCurrentIndex + 1) % newsImages.length;
@@ -929,9 +926,7 @@
   }
 
   newsAutoSwapInterval = setInterval(() => {
-    if (!newsHasManuallyClicked) {
-      cycleNewsImage();
-    }
+    if (!newsHasManuallyClicked) cycleNewsImage();
   }, 5000);
 
   newsImg.addEventListener('click', () => {
@@ -940,42 +935,30 @@
     cycleNewsImage();
   });
 
-  // --- History image swapping logic ---
   const largeImg = document.getElementById('large-history-img');
   const smallImg = document.getElementById('small-history-img');
-  let autoSwapInterval;
   let hasManuallyClicked = false;
+  let autoSwapInterval;
 
   function swapImages() {
-    const tempSrc = largeImg.src;
-    const tempAlt = largeImg.alt;
-    largeImg.src = smallImg.src;
-    largeImg.alt = smallImg.alt;
-    smallImg.src = tempSrc;
-    smallImg.alt = tempAlt;
+    [largeImg.src, smallImg.src] = [smallImg.src, largeImg.src];
+    [largeImg.alt, smallImg.alt] = [smallImg.alt, largeImg.alt];
   }
 
   autoSwapInterval = setInterval(() => {
-    if (!hasManuallyClicked) {
-      swapImages();
-    }
+    if (!hasManuallyClicked) swapImages();
   }, 10000);
 
-  // Both images can be clicked to swap
-  smallImg.addEventListener('click', () => {
-    hasManuallyClicked = true;
-    clearInterval(autoSwapInterval);
-    swapImages();
+  [largeImg, smallImg].forEach(img => {
+    img.addEventListener('click', () => {
+      hasManuallyClicked = true;
+      clearInterval(autoSwapInterval);
+      swapImages();
+    });
   });
 
-  largeImg.addEventListener('click', () => {
-    hasManuallyClicked = true;
-    clearInterval(autoSwapInterval);
-    swapImages();
-  });
+})();
 </script>
 
 </body>
 </html>
-
-
