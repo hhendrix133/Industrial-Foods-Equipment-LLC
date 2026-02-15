@@ -151,47 +151,123 @@
   }
 
   @media (max-width: 768px) {
+    body {
+      padding: 15px;
+    }
+
     .verification-container {
-      padding: 35px 25px;
+      padding: 30px 20px;
       border-width: 4px;
-    }
-
-    h1 {
-      font-size: 2.2em;
-      letter-spacing: 2px;
-    }
-
-    .initial-message {
-      font-size: 1em;
-    }
-
-    .status-code {
-      font-size: 1em;
-      padding: 6px 15px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .verification-container {
-      padding: 25px 20px;
-      border-width: 3px;
+      max-height: 95vh;
+      overflow-y: auto;
     }
 
     h1 {
       font-size: 1.8em;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
     }
 
     .initial-message {
       font-size: 0.95em;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
 
-    .footer-text {
+    .verification-status {
+      padding: 18px 15px;
+      margin: 20px 0;
+    }
+
+    .verification-status p {
+      font-size: 0.85em;
+      margin-bottom: 10px;
+    }
+
+    .status-code {
+      font-size: 0.9em;
+      padding: 6px 15px;
+      margin-top: 10px;
+    }
+
+    .processing-indicator {
       font-size: 0.8em;
+      margin-top: 15px;
+    }
+
+    .restriction-notice {
+      margin-top: 18px;
     }
 
     .restriction-notice p {
       font-size: 0.85em;
+    }
+
+    .footer-text {
+      font-size: 0.75em;
+      margin-top: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding: 10px;
+    }
+
+    .verification-container {
+      padding: 20px 15px;
+      border-width: 3px;
+      max-height: 96vh;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .initial-message {
+      font-size: 0.85em;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    .verification-status {
+      padding: 15px 12px;
+      margin: 15px 0;
+    }
+
+    .verification-status p {
+      font-size: 0.8em;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .status-code {
+      font-size: 0.85em;
+      padding: 5px 12px;
+      margin-top: 8px;
+      letter-spacing: 1px;
+    }
+
+    .processing-indicator {
+      font-size: 0.75em;
+      margin-top: 12px;
+    }
+
+    .restriction-notice {
+      margin-top: 15px;
+    }
+
+    .restriction-notice p {
+      font-size: 0.8em;
+      line-height: 1.4;
+    }
+
+    .footer-text {
+      font-size: 0.7em;
+      margin-top: 15px;
+      line-height: 1.4;
     }
   }
 </style>
